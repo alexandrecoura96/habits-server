@@ -73,11 +73,11 @@ export async function AppRoutes(app: FastifyInstance) {
     };
   });
 
-  app.patch("/habits/:id/toogle", async (request) => {
-    const toogleHabitParams = z.object({
+  app.patch("/habits/:id/toggle", async (request) => {
+    const toggleHabitParams = z.object({
       id: z.string().uuid(),
     });
-    const { id } = toogleHabitParams.parse(request.params);
+    const { id } = toggleHabitParams.parse(request.params);
 
     const today = dayjs().startOf("day").toDate();
 
@@ -120,7 +120,7 @@ export async function AppRoutes(app: FastifyInstance) {
     }
   });
 
-  app.get("/summary", async (request) => {
+  app.get("/summary", async () => {
     const summary = await prisma.$queryRaw`
       SELECT
       D.id,
